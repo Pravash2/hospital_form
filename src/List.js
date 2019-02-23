@@ -17,8 +17,8 @@ import StarBorder from "@material-ui/icons/StarBorder";
 import Edit from "@material-ui/icons/Edit";
 
 import axios from "axios";
-import {Link} from 'react-router-dom'
-import Dialog from './Dialogs'
+import { Link } from "react-router-dom";
+import Dialog from "./Dialogs";
 
 const styles = theme => ({
   root: {
@@ -35,7 +35,7 @@ const styles = theme => ({
 class NestedList extends React.Component {
   state = {
     hospital: [],
-    open:false
+    open: false
   };
 
   componentDidMount() {
@@ -49,17 +49,16 @@ class NestedList extends React.Component {
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
   };
-  renderDialog(){
-    this.setState({open:true})
+  renderDialog() {
+    this.setState({ open: true });
   }
 
   renderList() {
     return this.state.hospital.map(hospital => {
       return (
-        <div>
-      
-          <ListItem key={hospital._id} button onClick={this.renderDialog()}>
-          <Dialog open={this.state.open} />
+        <div key={hospital._id}>
+        <Link to={`/edit/${hospital._id}`} >
+          <ListItem button>
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
@@ -67,10 +66,9 @@ class NestedList extends React.Component {
               primary={hospital.Hospital_Name}
               secondary={hospital.Location}
             />
-           
           </ListItem>
-    
           <Divider />
+          </Link>
         </div>
       );
     });
