@@ -23,7 +23,9 @@ class EditForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     axios
       .get(
-        `https://find-hospital.herokuapp.com/api/hospitals/5c760542a7d1b00d041d7494`
+        `https://find-hospital.herokuapp.com/api/hospitals/${
+          this.props.match.params.id
+        }`
       )
       .then(res => {
         this.setState({
@@ -108,7 +110,7 @@ class EditForm extends React.Component {
       console.log(this.state.hospital);
       axios
         .put(
-          `http://localhost:5000/api/hospitals/medicine/${
+          `https://find-hospital.herokuapp.com/api/hospitals/medicine/${
             this.state.hospital._id
           }+${this.state.select2._id}`,
           {
@@ -178,7 +180,8 @@ class EditForm extends React.Component {
                     <IconButton
                       aria-label="Comments"
                       button
-                      onClick={() => this.deleteValue(item)}>
+                      onClick={() => this.deleteValue(item)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableRow>
@@ -211,7 +214,8 @@ class EditForm extends React.Component {
                   style={{ margin: "auto", width: "210px" }}
                   color="primary"
                   variant="outlined"
-                  type="submit">
+                  type="submit"
+                >
                   Edit/Create
                 </Button>
               }

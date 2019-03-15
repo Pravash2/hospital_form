@@ -15,6 +15,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 import Edit from "@material-ui/icons/Edit";
+import Create from "@material-ui/icons/Add";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -57,17 +58,17 @@ class NestedList extends React.Component {
     return this.state.hospital.map(hospital => {
       return (
         <div key={hospital._id}>
-        <Link to={`/edit/${hospital._id}`} style={{textDecoration:'none'}} >
-          <ListItem button>
-            <ListItemIcon>
-              <Edit />
-            </ListItemIcon>
-            <ListItemText
-              primary={hospital.Hospital_Name}
-              secondary={hospital.Location}
-            />
-          </ListItem>
-          <Divider />
+          <Link to={`/edit/${hospital._id}`} style={{ textDecoration: "none" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <Edit />
+              </ListItemIcon>
+              <ListItemText
+                primary={hospital.Hospital_Name}
+                secondary={hospital.Location}
+              />
+            </ListItem>
+            <Divider />
           </Link>
         </div>
       );
@@ -81,11 +82,19 @@ class NestedList extends React.Component {
         <List
           component="nav"
           subheader={
-            <ListSubheader component="div">
-              Welcome to edit page of List of Hospital
-            </ListSubheader>
+            <div>
+              <ListSubheader component="div">
+                Welcome to edit page of List of Hospital
+                <Link to="/create">
+                  <ListItemIcon style={{ float: "right" }}>
+                    <Create />
+                  </ListItemIcon>
+                </Link>
+              </ListSubheader>
+            </div>
           }
-          className={classes.root}>
+          className={classes.root}
+        >
           {this.renderList()}
         </List>
       );

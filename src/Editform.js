@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import Dialogs from "./Dialogs";
@@ -28,7 +29,9 @@ const facilities = [
   "Physiotherapy",
   "Laboratory services",
   "ECG Services",
-  "Pharmacy"
+  "Pharmacy",
+  "Aarogyasri Scheme",
+  "Ambulance Service"
 ];
 const styles = theme => ({
   container: {
@@ -112,7 +115,11 @@ class OutlinedTextFields extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     let hospital = [];
     axios
-      .get(`https://find-hospital.herokuapp.com/api/hospitals/${this.props.match.params.id}`)
+      .get(
+        `https://find-hospital.herokuapp.com/api/hospitals/${
+          this.props.match.params.id
+        }`
+      )
       .then(res => {
         hospital = res.data;
 
@@ -232,7 +239,7 @@ class OutlinedTextFields extends React.Component {
   };
 
   handelCheckSpecialities = items => {
-    const item=items.filter(it=>it.length>1)
+    const item = items.filter(it => it.length > 1);
     this.setState({ Specialties: [...item] });
   };
   handelCheckFacilites = items => {
@@ -268,13 +275,15 @@ class OutlinedTextFields extends React.Component {
 
   render() {
     const { classes } = this.props;
-      if (this.state.Hospital_Name) {
-        return (
+    if (this.state.Hospital_Name) {
+      return (
+        <div>
           <form
             className={classes.container}
             noValidate
             autoComplete="off"
-            onSubmit={this.handleSubmit}>
+            onSubmit={this.handleSubmit}
+          >
             <TextField
               id="outlined-full-width"
               label="Hospital Name"
@@ -329,7 +338,8 @@ class OutlinedTextFields extends React.Component {
               }}
               helperText="e.g private or government"
               margin="normal"
-              variant="outlined">
+              variant="outlined"
+            >
               {hospitaltype.map(option => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
@@ -350,7 +360,8 @@ class OutlinedTextFields extends React.Component {
               }}
               helperText="e.g superspecialist,clinic,Laboratories"
               margin="normal"
-              variant="outlined">
+              variant="outlined"
+            >
               {currencies.map(option => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
@@ -657,12 +668,14 @@ class OutlinedTextFields extends React.Component {
               variant="contained"
               color="primary"
               fullWidth
-              className={classes.button}>
+              className={classes.button}
+            >
               Submit
             </Button>
           </form>
-        );
-      }
+        </div>
+      );
+    }
     return <div>Loading</div>;
   }
 }
