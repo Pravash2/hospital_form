@@ -85,10 +85,11 @@ class NestedList extends React.Component {
             <div>
               <ListSubheader component="div">
                 Welcome to edit page of List of Hospital
-                <Link to="/create">
+                <Link to="/create" >
                   <ListItemIcon style={{ float: "right" }}>
                     <Create />
                   </ListItemIcon>
+                  <ListItemText>Create New Hospital</ListItemText>
                 </Link>
               </ListSubheader>
             </div>
